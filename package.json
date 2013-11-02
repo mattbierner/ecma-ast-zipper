@@ -1,0 +1,17 @@
+{
+    "name": "emca-ast-zipper",
+    "version": "0.0.0",
+    "description": "ECMAScript Zippers",
+    "main": "lib/neith.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/mattbierner/ecma-ast-zipper.git"
+    },
+    "keywords": [
+        "zipper",
+        "ecmascript",
+        "tree"
+    ],
+    "author": "Matt Bierner",
+    "license": "MIT"
+}

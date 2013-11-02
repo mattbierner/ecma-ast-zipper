@@ -1,0 +1,43 @@
+package (
+    ecmaZipper)
+with
+    import 'neith/zipper' {treeZipper},
+    import 'ecma_ast/node' {Node, reconstruct}
+in {
+
+var range = \start, end -> {
+    var a = [];
+    for (var i = 0; i < end; i = i + 1)
+        a[i] = i;
+    return a;
+};
+
+var joinKeys = \children, values->
+    children.reduce(
+        \p, c -> {
+            p[c] = values[c];
+            return p;
+        },
+        []);
+
+/**
+ * 
+ */
+ecmaZipper = let
+    getChildren = \node ->
+        (node instanceof Node ?
+            node.children : 
+            range(0, node.length)),
+    
+    construct = \node, children, values ->
+        (node instanceof Node ?
+            reconstruct(node, values, {}) :
+            joinKeys(children, values))
+in
+    \root ->
+        treeZipper(
+            getChildren,
+            construct,
+            root);
+
+}
