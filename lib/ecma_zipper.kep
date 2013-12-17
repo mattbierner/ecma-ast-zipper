@@ -1,43 +1,45 @@
+/**
+ * @fileOverview ECMAScript AST zipper.
+ */
 package (
     ecmaZipper)
 with
-    import 'neith/zipper' {treeZipper},
-    import 'ecma_ast/node' {Node, reconstruct}
+    import 'neith/tree' {treeZipper},
+
+    import 'ecma_ast/node' {Node modify}
 in {
 
-var range = \start, end -> {
+var range = \end -> {
     var a = [];
     for (var i = 0; i < end; i = i + 1)
         a[i] = i;
     return a;
 };
 
-var joinKeys = \children, values->
+var joinKeys = \children values ->
     children.reduce(
-        \p, c -> {
+        \p c -> {
             p[c] = values[c];
             return p;
         },
         []);
 
 /**
+ * Create an new ECMAScript AST Zipper.
  * 
+ * @param root Root of AST.
  */
-ecmaZipper = let
-    getChildren = \node ->
+ecmaZipper = (treeZipper,
+    \node ->
         (node instanceof Node ?
-            node.children : 
-            range(0, node.length)),
+            node.children :
+            range(node.length)),
     
-    construct = \node, children, values ->
+    \n k -> n[k],
+    
+    \node _ children values ->
         (node instanceof Node ?
-            reconstruct(node, values, {}) :
-            joinKeys(children, values))
-in
-    \root ->
-        treeZipper(
-            getChildren,
-            construct,
-            root);
+            modify(node, values, {}) :
+            joinKeys(children, values)));
 
 }

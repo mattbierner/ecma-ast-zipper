@@ -1,9 +1,11 @@
 define(['$',
         'ecma_ast_zipper/ecma_zipper',
-        'neith/zipper'],
+        'neith/zipper',
+        'neith/tree'],
 function($,
         ecma_zipper,
-        zipper) {
+        zipper,
+        tree) {
     
     return {
         'module': "ECMA Zipper",
@@ -20,7 +22,7 @@ function($,
                 
                 var z = ecma_zipper.ecmaZipper(prog);
                 
-                var r = zipper.getNode(zipper.up(zipper.down(z)));
+                var r = tree.node(zipper.up(zipper.down(z)));
                 
                 assert.equal(r.type, 'Program');
                 assert.equal(r.body.length, 2);
@@ -42,10 +44,10 @@ function($,
                 
                 var z = ecma_zipper.ecmaZipper(prog);
                 
-                var c = zipper.child(0, zipper.child('body', z));
+                var c = tree.child(0, tree.child('body', z));
                 
-                var r1 = zipper.getNode(c),
-                    r2 = zipper.getNode(zipper.sibling(1, c));
+                var r1 = tree.node(c),
+                    r2 = tree.node(tree.sibling(1, c));
                 
                 assert.equal(r1.type, 'ExpressionStatement');
                 assert.equal(r1.expression.name, 'a');
@@ -58,11 +60,11 @@ function($,
                 
                 var z = ecma_zipper.ecmaZipper(prog);
                 
-                var c = zipper.child('body', z);
+                var c = tree.child('body', z);
                 
-                var r1 = zipper.getNode(
+                var r1 = tree.node(
                     zipper.root(
-                        zipper.insertChild(1, $.Expression($.Id('b')), c)));
+                        tree.insertChild(1, $.Expression($.Id('b')), c)));
                 
                 assert.equal(r1.type, 'Program');
                 assert.equal(r1.body.length, 2);
