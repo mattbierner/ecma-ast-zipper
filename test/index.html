@@ -15,10 +15,12 @@
     <script type="application/javascript">
         requirejs.config({
             paths: {
+                'ecma_ast_zipper': '../dist',
+            
                 'ecma_ast': '../dependencies/ecma-ast/lib',
-                'ecma_ast_zipper': '../lib',
+                
                 'neith': '../dependencies/neith/dist',
-                'nu': '../dependencies/nu/lib'
+                'nu': '../dependencies/nu/dist'
             }
         });
         require(
