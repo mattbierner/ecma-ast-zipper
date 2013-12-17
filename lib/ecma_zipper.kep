@@ -31,9 +31,10 @@ var joinKeys = \children values ->
  */
 ecmaZipper = (treeZipper,
     \node ->
-        (node instanceof Node ?
-            node.children :
-            range(node.length)),
+        (!node ? [] :
+            (Array.isArray(node) ?
+                range(node.length) :
+                node.children)),
     
     \n k -> n[k],
     

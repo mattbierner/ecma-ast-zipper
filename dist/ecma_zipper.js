@@ -24,7 +24,7 @@ define(["require", "exports", "neith/tree", "ecma_ast/node"], (function(require,
         }), []);
     });
     (ecmaZipper = treeZipper.bind(null, (function(node) {
-        return ((node instanceof Node) ? node.children : range(node.length));
+        return (!node ? [] : (Array.isArray(node) ? range(node.length) : node.children));
     }), (function(n, k) {
         return n[k];
     }), (function(node, _, children, values) {
