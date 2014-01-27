@@ -1,4 +1,7 @@
-# ECMAScript AST Zippers
+# ECMAScript AST Zipper
 
 ## About
-Zipper for ECMAScript ASTs in Javascript.
+[Neith][neith] zipper for ECMAScript ASTs in Javascript.
+
+
+[neith]: https://github.com/mattbierner/neith
