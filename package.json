@@ -20,7 +20,8 @@
     },
     "files": [
         "dist_node/",
-        "lib/"
+        "lib/",
+	"index.js"
     ],
     "dependencies": {
         "neith": "1.3.x",
