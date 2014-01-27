@@ -4,25 +4,20 @@
 package (
     ecmaZipper)
 with
-    import 'neith/tree' {treeZipper},
-
-    import 'ecma_ast/node' {Node modify}
+    import 'nu-stream::gen' {range},
+    import 'nu-stream::stream' {foldl from NIL},
+    import 'neith::tree' {treeZipper},
+    import 'ecma_ast::node' {Node modify}
 in {
 
-var range = \end -> {
-    var a = [];
-    for (var i = 0; i < end; i = i + 1)
-        a[i] = i;
-    return a;
-};
-
-var joinKeys = \children values ->
-    children.reduce(
-        \p c -> {
-            p[c] = values[c];
+var buildArray = \pairs ->
+    foldl(
+        \p, {key value} -> {
+            p[key] = value;
             return p;
         },
-        []);
+        [],
+        pairs);
 
 /**
  * Create an new ECMAScript AST Zipper.
@@ -31,16 +26,17 @@ var joinKeys = \children values ->
  */
 ecmaZipper = (treeZipper,
     \node ->
-        (!node ? [] :
-            (Array.isArray(node) ?
-                range(node.length) :
-                node.children)),
+        ?node
+            :?Array.isArray(node)
+                :range(0, node.length)
+                :from(node.children)
+            :NIL,
     
     \n k -> n[k],
     
-    \node _ children values ->
-        (node instanceof Node ?
-            modify(node, values, {}) :
-            joinKeys(children, values)));
+    \node pairs values ->
+        ?node instanceof Node
+            :modify(node, values(), {})
+            :buildArray(pairs));
 
 }

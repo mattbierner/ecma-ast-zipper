@@ -1,34 +1,27 @@
-/*
- * THIS FILE IS AUTO GENERATED from 'lib/ecma_zipper.kep'
- * DO NOT EDIT
-*/
-define(["require", "exports", "neith/tree", "ecma_ast/node"], (function(require, exports, __o, __o0) {
+define(["require", "exports", "nu-stream/gen", "nu-stream/stream", "neith/tree", "ecma_ast/node"], (function(require,
+    exports, __o, __o0, __o1, __o2) {
     "use strict";
-    var ecmaZipper;
-    var __o = __o,
-        treeZipper = __o["treeZipper"],
-        __o0 = __o0,
-        Node = __o0["Node"],
-        modify = __o0["modify"];
-    var range = (function(end) {
-        var a = [];
-        for (var i = 0;
-            (i < end);
-            (i = (i + 1)))(a[i] = i);
-        return a;
-    });
-    var joinKeys = (function(children, values) {
-        return children.reduce((function(p, c) {
-            (p[c] = values[c]);
-            return p;
-        }), []);
-    });
+    var range = __o["range"],
+        foldl = __o0["foldl"],
+        from = __o0["from"],
+        NIL = __o0["NIL"],
+        treeZipper = __o1["treeZipper"],
+        Node = __o2["Node"],
+        modify = __o2["modify"],
+        ecmaZipper, buildArray = (function(pairs) {
+            return foldl((function(p, __o3) {
+                var key = __o3["key"],
+                    value = __o3["value"];
+                (p[key] = value);
+                return p;
+            }), [], pairs);
+        });
     (ecmaZipper = treeZipper.bind(null, (function(node) {
-        return (!node ? [] : (Array.isArray(node) ? range(node.length) : node.children));
+        return (node ? (Array.isArray(node) ? range(0, node.length) : from(node.children)) : NIL);
     }), (function(n, k) {
         return n[k];
-    }), (function(node, _, children, values) {
-        return ((node instanceof Node) ? modify(node, values, ({})) : joinKeys(children, values));
+    }), (function(node, pairs, values) {
+        return ((node instanceof Node) ? modify(node, values(), ({})) : buildArray(pairs));
     })));
     (exports.ecmaZipper = ecmaZipper);
-}))
+}));
