@@ -7,7 +7,7 @@ with
     import 'nu-stream::gen' {range},
     import 'nu-stream::stream' {foldl from NIL},
     import 'neith::tree' {treeZipper},
-    import 'ecma_ast::node' {Node modify}
+    import 'ecma-ast::node' {Node modify}
 in {
 
 var buildArray = \pairs ->

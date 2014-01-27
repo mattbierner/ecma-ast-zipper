@@ -1,4 +1,4 @@
-define(["require", "exports", "nu-stream/gen", "nu-stream/stream", "neith/tree", "ecma_ast/node"], (function(require,
+define(["require", "exports", "nu-stream/gen", "nu-stream/stream", "neith/tree", "ecma-ast/node"], (function(require,
     exports, __o, __o0, __o1, __o2) {
     "use strict";
     var range = __o["range"],
