@@ -1,9 +1,9 @@
 [submodule "dependencies/neith"]
 	path = dependencies/neith
-	url = https://github.com/mattbierner/neith
+	url = https://github.com/mattbierner/neith.gi
 [submodule "dependencies/ecma-ast"]
 	path = dependencies/ecma-ast
-	url = https://github.com/mattbierner/ecma-ast
+	url = https://github.com/mattbierner/ecma-ast.git
 [submodule "dependencies/nu"]
 	path = dependencies/nu
-	url = git@github.com:mattbierner/nu.git
+	url = https://github.com/mattbierner/nu.git
