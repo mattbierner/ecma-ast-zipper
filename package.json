@@ -23,7 +23,7 @@
         "lib/"
     ],
     "dependencies": {
-        "neith": "~1.0",
-        "ecma-ast": "~2.0"
+        "neith": ">= 1.3",
+        "ecma-ast": ">= 2.4"
     }
 }
