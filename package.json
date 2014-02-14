@@ -1,6 +1,6 @@
 {
     "name": "ecma-ast-zipper",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "ECMAScript Zippers",
     "author": "Matt Bierner",
     "license": "MIT",
