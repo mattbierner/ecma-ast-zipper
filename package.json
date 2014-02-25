@@ -1,6 +1,6 @@
 {
     "name": "ecma-ast-zipper",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "ECMAScript Zippers",
     "author": "Matt Bierner",
     "license": "MIT",
@@ -24,6 +24,7 @@
     ],
     "dependencies": {
         "neith": ">= 1.3",
-        "ecma-ast": ">= 2.4"
+        "ecma-ast": ">= 2.4",
+        "nu-stream": ">= 3.1.0"
     }
 }
