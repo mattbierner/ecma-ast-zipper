@@ -1,42 +1,61 @@
 /**
- * @fileOverview ECMAScript AST zipper.
+ * @fileOverview ECMA AST zipper.
  */
 package (
-    ecmaZipper)
+    ecmaZipper
+    
+    getChild
+    getChildren
+    construct)
 with
     import 'nu-stream::gen' {range},
     import 'nu-stream::stream' {foldl from NIL},
     import 'neith::tree' {treeZipper},
-    import 'ecma-ast::node' {Node modify}
+    import 'khepri-ast::node' {Node modify}
 in {
 
-var buildArray = \pairs ->
+var buildArray := \pairs ->
     foldl(
-        \p, {key value} -> {
-            p[key] = value;
+        \p {key value} -> {
+            p.(key) = value;
             return p;
         },
         [],
         pairs);
 
 /**
- * Create an new ECMAScript AST Zipper.
+ * Get the children of a node.
+ */
+getChildren := \node ->
+    ?Array.isArray node
+        :range(0, node.length)
+    :?node && node.children
+        :from(node.children)
+    :NIL;
+
+/**
+ * Get the child of a node.
+ */
+getChild = (.);
+
+/**
+ * Reconstruct a node
+ */
+construct := \node pairs values ->
+    ?Array.isArray node
+        :buildArray(pairs)
+    :?node && node.children
+        :modify(node, values(), {})
+    :node;
+
+/**
+ * Create a new ECMA AST Zipper.
  * 
  * @param root Root of AST.
  */
-ecmaZipper = (treeZipper,
-    \node ->
-        ?node
-            :?Array.isArray(node)
-                :range(0, node.length)
-                :from(node.children)
-            :NIL,
-    
-    \n k -> n[k],
-    
-    \node pairs values ->
-        ?node instanceof Node
-            :modify(node, values(), {})
-            :buildArray(pairs));
+ecmaZipper := treeZipper@(
+    getChildren,
+    getChild,
+    construct);
 
 }
