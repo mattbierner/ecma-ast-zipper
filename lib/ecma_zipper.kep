@@ -1,5 +1,5 @@
 /**
- * @fileOverview ECMA AST zipper.
+ * @fileOverview ECMA AST zipper. 
  */
 package (
     ecmaZipper
